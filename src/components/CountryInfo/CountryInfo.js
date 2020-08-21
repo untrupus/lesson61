@@ -26,7 +26,7 @@ const CountryInfo = props => {
 
     const borderCountry = borders.map(border => {
        return (
-           <li key={border}>{border}</li>
+           <li key={border} className="listItem">{border}</li>
        )
     });
 

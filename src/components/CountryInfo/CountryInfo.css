@@ -2,3 +2,8 @@
     width: 200px;
     height: auto;
 }
+
+.listItem {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
