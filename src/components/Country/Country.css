@@ -1,0 +1,13 @@
+.country {
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+    margin: 2px;
+    padding: 7px;
+}
+
+.country:hover {
+    padding: 6px;
+    border: 1px solid black;
+    background: #f8f7d4;
+}

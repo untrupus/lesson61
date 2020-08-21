@@ -1,0 +1,21 @@
+.App {
+    display: flex;
+    width: 1200px;
+    margin: 0 auto;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.countryList {
+    width: 30%;
+    border: 1px solid black;
+    padding: 0 10px;
+    height: 700px;
+    overflow: scroll;
+}
+
+.countryInfo {
+    width: 60%;
+    border: 1px solid black;
+    padding: 20px;
+}
