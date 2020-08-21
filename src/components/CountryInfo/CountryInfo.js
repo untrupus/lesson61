@@ -4,23 +4,31 @@ import './CountryInfo.css';
 
 const CountryInfo = props => {
     const [info, setInfo] = useState(null);
+    const [borders, setBorders] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             if (props.alpha !== null) {
                 const response = await axios.get('https://restcountries.eu/rest/v2/alpha/' + props.alpha);
                 setInfo(response.data);
+                const promises = response.data.borders.map(async country => {
+                    const countryUrl = 'https://restcountries.eu/rest/v2/alpha/' + country;
+                    const countryResponse = await axios.get(countryUrl);
+                    return [countryResponse.data.name];
+                });
+                const newCountries = await Promise.all(promises);
+
+                setBorders(newCountries);
             }
         }
         fetchData().catch(console.error);
-    }, [props.alpha])
+    }, [props.alpha]);
 
-    // const borders = info.borders.map(border => {
-    //     return (
-    //         <li>{border}</li>
-    //     )
-    // });
-
+    const borderCountry = borders.map(border => {
+       return (
+           <li key={border}>{border}</li>
+       )
+    });
 
     return info && (
         <div>
@@ -28,8 +36,10 @@ const CountryInfo = props => {
             <img src={info.flag} className="flag" alt="flag"/>
             <p>Capital: {info.capital}</p>
             <p>Population: {info.population}</p>
-            <p>{info.borders.join(' ')}</p>
-            {/*<ul>{borders}</ul>*/}
+            <h4>Border with:</h4>
+            <ul>
+                {borderCountry}
+            </ul>
         </div>
     );
 };
